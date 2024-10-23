@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Generator</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <h1>Template Generator</h1>
+
+    <!-- Add Brand Section -->
+    <div class="form-group">
+        <button id="add-brand-toggle-button" onclick="toggleBrandInput()">Add Brand</button>
+    </div>
+
+    <div id="brand-input-group" style="display:none;" class="form-group">
+        <input type="text" id="brand" placeholder="Enter brand name">
+        <button id="add-brand-button" onclick="addBrand()">Add</button>
+        <button id="close-brand-button" onclick="closeBrandInput()">Close</button>
+    </div>
+
+    <!-- Inline Radio Buttons for Choose Platform -->
+    <div class="form-group inline-form">
+        <label>Choose Platform:</label>
+        <label><input type="radio" name="platform" value="Amazon" checked> Amazon</label>
+        <label><input type="radio" name="platform" value="Flipkart"> Flipkart</label>
+        <label><input type="radio" name="platform" value="Myntra"> Myntra</label>
+        <label><input type="radio" name="platform" value="Nykaa"> Nykaa</label>
+        <label><input type="radio" name="platform" value="Meesho"> Meesho</label>
+    </div>
+
+    <!-- Inline Checkboxes for Select Options -->
+    <div class="form-group inline-form">
+        <label>Select Options:</label>
+        <label><input type="checkbox" id="review" name="options" value="Review" checked onchange="toggleInput('review-less-input')"> Review</label>
+        <label><input type="checkbox" id="rating" name="options" value="Rating" onchange="toggleInput('rating-less-input')"> Rating</label>
+        <label><input type="checkbox" id="submitted" name="options" value="Review Submitted" onchange="toggleInput('submitted-less-input')"> Review Submitted</label>
+        <label><input type="checkbox" id="order" name="options" value="Only Order" onchange="toggleInput('order-only-less-input')"> Only Order</label>
+    </div>
+
+
+    <!-- Product Name and Price Fields -->
+    <div class="form-group">
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" placeholder="Enter product name">
+    </div>
+
+    <div class="form-group">
+        <label for="pp">Price (PP):</label>
+        <input type="number" id="pp" placeholder="Enter product price (PP)">
+    </div>
+
+    <!-- Less Input Fields (Hidden by Default) -->
+    <div class="form-group" id="review-less-input" style="display: block;">
+        <label for="review-less">Review Less:</label>
+        <input type="text" id="review-less" placeholder="Enter review less amount">
+    </div>
+
+    <div class="form-group" id="rating-less-input" style="display: none;">
+        <label for="rating-less">Rating Less:</label>
+        <input type="text" id="rating-less" placeholder="Enter rating less amount">
+    </div>
+
+    <div class="form-group" id="submitted-less-input" style="display: none;">
+        <label for="submitted-less">Review Submitted Less:</label>
+        <input type="text" id="review-submitted-less" placeholder="Enter review submitted less amount">
+    </div>
+
+    <div class="form-group" id="order-only-less-input" style="display: none;">
+        <label for="order-only-less">Only Order Less:</label>
+        <input type="text" id="order-only-less" placeholder="Enter only order less amount">
+    </div>
+
+
+
+    <button onclick="generateTemplate()">Generate & Copy</button>
+
+    <h3>Generated Template:</h3>
+    <pre id="template"></pre>
+
+    <h3>Stored Brand Names:</h3>
+    <ul id="brand-list"></ul>
+
+    <script src="./script.js"></script>
+</body>
+</html>
