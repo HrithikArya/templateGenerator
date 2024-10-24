@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template Generator</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
@@ -78,7 +80,12 @@
     <button onclick="generateTemplate()">Generate & Copy</button>
 
     <h3>Generated Template:</h3>
-    <pre id="template"></pre>
+    <div class="template-output">
+        <pre id="template"></pre>
+        <button id="copy-button" onclick="copyTemplate()" title="Copy Template">
+            <i class="fas fa-copy"></i> Copy
+        </button>
+    </div>
 
     <h3>Stored Brand Names:</h3>
     <ul id="brand-list"></ul>

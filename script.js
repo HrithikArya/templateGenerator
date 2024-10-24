@@ -154,12 +154,42 @@ function generateTemplate() {
         return emojis[Math.floor(Math.random() * emojis.length)];
     }
 
-    // Create the template based on the selected options
-    res =  `*Amazon Review Deal*\n\n*${name}*\n\nPP: ${pp}\n\n`;
+    // Get the selected platform
+    const selectedPlatform = document.querySelector('input[name="platform"]:checked').value;
+    const selectedOptionsForDealType = [];
+    const checkboxesForDealType = document.querySelectorAll('input[name="options"]:checked');
+    checkboxesForDealType.forEach(checkbox => {
+        selectedOptionsForDealType.push(checkbox.value);
+    });
+   // Create the template based on the selected options
+    //res =  `*${selectedPlatform} Review Deal*\n\n*${name}*\n\nPP: ${pp}\n\n`;
+
+        // Dynamically generate the deal type based on selected options
+    let dealType = `${selectedPlatform} `;
+    if (selectedOptionsForDealType.includes("Review") && selectedOptionsForDealType.includes("Rating")) {
+        dealType += "Review/Rating Deal";
+    } else if (selectedOptionsForDealType.includes("Review")) {
+        dealType += "Review Deal";
+    } else if (selectedOptionsForDealType.includes("Rating")) {
+        dealType += "Rating Deal";
+    } else if (selectedOptionsForDealType.includes("Review Submitted")) {
+        dealType += "Review Submitted Deal";
+    } else if (selectedOptionsForDealType.includes("Only Order")) {
+        dealType += "Only Order Deal";
+    }
+
+    // Add platform and deal type to the template
+    res += `*${dealType}*\n\n*${name}*\n\n*PP: ${pp}*\n\n`;
+
 
     selectedOptions.forEach(option => {
         res += `*\`${option} Less\`* ${getRandomEmoji()}\n`; // Add random emoji for each selected option
     });
+
+    
+ 
+
+    
 
     res += "\nDM for Link 🔗"
     // Display the result in the 'template' element
