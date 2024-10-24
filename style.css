@@ -71,6 +71,12 @@ button {
     border: none;
     cursor: pointer;
     margin-top: 10px;
+    display: flex;
+    align-items: center; /* Aligns icon and text vertically */
+    justify-content: center; /* Center the icon and text */
+}
+button i {
+    margin-right: 5px; /* Space between icon and text */
 }
 
 button:hover {

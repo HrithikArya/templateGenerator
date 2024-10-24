@@ -94,6 +94,36 @@ function toggleInput(inputId) {
     }
 }
 
+function checkForFull(less) {
+    // Convert the input to a number if it's a string
+    if (typeof less === 'string') {
+        less = less.trim(); // Remove whitespace
+        if (!isNaN(less) && less !== '') {
+            less = Number(less); // Convert to number if it's a numeric string
+        }
+    }
+
+    // Check if less is an integer or a number
+    if (typeof less === 'number') {
+        if (less === 0) {
+            return 'Full Refund'; // Case for zero
+        } else if (less < 0) {
+            return `Full + ${Math.abs(less)} Commission`; // Case for negative
+        } else if (less > 0) {
+            return less; // Case for positive
+        }
+    } else if (typeof less === 'string') {
+        // If it's a string, check for specific values
+        const lowerCaseLess = less.toLowerCase(); // Normalize the string to lower case
+        if (lowerCaseLess === 'full' || lowerCaseLess === 'full refund') {
+            return 'Full Refund'; // Case for "full" or "full refund"
+        }
+    }
+
+    // Default return value if none of the conditions are met
+    return 'Invalid Input';
+}
+
 function generateTemplate() {
     // Get user inputs
     let name = document.getElementById("name").value;
@@ -104,19 +134,19 @@ function generateTemplate() {
     const selectedOptions = [];
     if (document.getElementById("review").checked) {
         const reviewLess = document.getElementById("review-less").value.trim();
-        selectedOptions.push(`Review: ${reviewLess}`);
+        selectedOptions.push(`Review: ${checkForFull(reviewLess)}`);
     }
     if (document.getElementById("rating").checked) {
         const ratingLess = document.getElementById("rating-less").value.trim();
-        selectedOptions.push(`Rating: ${ratingLess}`);
+        selectedOptions.push(`Rating: ${checkForFull(ratingLess)}`);
     }
     if (document.getElementById("submitted").checked) {
         const submittedLess = document.getElementById("submitted-less").value.trim();
-        selectedOptions.push(`Review Submitted: ${submittedLess}`);
+        selectedOptions.push(`Review Submitted: ${checkForFull(submittedLess)}`);
     }
     if (document.getElementById("order").checked) {
         const orderLess = document.getElementById("order-less").value.trim();
-        selectedOptions.push(`Only Order: ${orderLess}`);
+        selectedOptions.push(`Only Order: ${checkForFull(orderLess)}`);
     }
 
     // Check if at least one option is selected
@@ -200,11 +230,71 @@ function generateTemplate() {
     document.body.appendChild(tempInput);
     tempInput.value = res;
     tempInput.select();
+    //document.execCommand("copy");
+    //document.body.removeChild(tempInput);
+
+    //alert("Template copied to clipboard!");
+}
+
+function clearForm() {
+    document.getElementById("brand").value = "";
+    document.getElementById("name").value = "";
+    document.getElementById("pp").value = "";
+    document.getElementById("review-less").value = "";
+    document.getElementById("rating-less").value = "";
+    document.getElementById("review-submitted-less").value = "";
+    document.getElementById("order-only-less").value = "";
+    
+    // Hide less input fields
+    document.getElementById("review-less-input").style.display = "block";
+    document.getElementById("rating-less-input").style.display = "none";
+    document.getElementById("submitted-less-input").style.display = "none";
+    document.getElementById("order-only-less-input").style.display = "none";
+
+    // Clear the generated template
+    document.getElementById("template").textContent = "";
+    
+    // Reset brands array and refresh brand list
+    brands = [];
+    displayBrands();
+    document.getElementById("brand-input-group").style.display = "none"; // Hide brand input group
+}
+
+function copyTemplate() {
+    const templateText = document.getElementById("template").textContent;
+    
+    if (!templateText) {
+        alert("There is no template to copy!");
+        return;
+    }
+
+    const tempInput = document.createElement("textarea");
+    document.body.appendChild(tempInput);
+    tempInput.value = templateText;
+    tempInput.select();
     document.execCommand("copy");
     document.body.removeChild(tempInput);
 
-    alert("Template copied to clipboard!");
+    //alert("Template copied to clipboard!");
+        // Create a temporary message element
+    const message = document.createElement("div");
+    message.textContent = "Template copied to clipboard!";
+    message.style.position = "fixed";
+    message.style.top = "20px"; // Position it at the top of the page
+    message.style.right = "20px"; // Position it to the right
+    message.style.backgroundColor = "#4caf50"; // Green background
+    message.style.color = "#fff"; // White text
+    message.style.padding = "10px";
+    message.style.borderRadius = "5px";
+    message.style.zIndex = "1000"; // Ensure it's above other content
+    document.body.appendChild(message);
+
+    // Remove the message after 2-3 seconds
+    setTimeout(() => {
+        document.body.removeChild(message);
+    }, 3000); // 3000 milliseconds = 3 seconds
 }
+
 
 // Call displayBrands on page load to show stored brands
 displayBrands();
