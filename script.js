@@ -110,7 +110,7 @@ function checkForFull(less) {
         } else if (less < 0) {
             return `Full + ${Math.abs(less)} Commission`; // Case for negative
         } else if (less > 0) {
-            return less; // Case for positive
+            return `${Math.abs(less)} Less`; // Case for positive
         }
     } else if (typeof less === 'string') {
         // If it's a string, check for specific values
@@ -213,7 +213,7 @@ function generateTemplate() {
 
 
     selectedOptions.forEach(option => {
-        res += `*\`${option} Less\`* ${getRandomEmoji()}\n`; // Add random emoji for each selected option
+        res += `*\`${option}\`* ${getRandomEmoji()}\n`; // Add random emoji for each selected option
     });
 
     
@@ -226,10 +226,10 @@ function generateTemplate() {
     document.getElementById("template").textContent = res;
 
     // Copy the result to the clipboard
-    const tempInput = document.createElement("textarea");
-    document.body.appendChild(tempInput);
-    tempInput.value = res;
-    tempInput.select();
+    // const tempInput = document.createElement("textarea");
+    // document.body.appendChild(tempInput);
+    // tempInput.value = res;
+    // tempInput.select();
     //document.execCommand("copy");
     //document.body.removeChild(tempInput);
 
