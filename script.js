@@ -295,6 +295,24 @@ function copyTemplate() {
     }, 3000); // 3000 milliseconds = 3 seconds
 }
 
+const API_BASE_URL = "https://templategeneratorbackend.vercel.app";
+
+async function getBrandsFromAPI() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/brands`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const brands = await response.json();
+        console.log(brands);
+    } catch (error) {
+        console.error('Error fetching brands:', error);
+    }
+}
+
+// Call the function
+getBrandsFromAPI();
+
 
 // Call displayBrands on page load to show stored brands
 displayBrands();
