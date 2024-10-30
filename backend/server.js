@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 const allowedOrigins = [
     'http://localhost:3000', // Your local development URL
     'http://localhost:5500', // Your local development URL
-    'https://hrithikarya.github.io/templateGenerator/' // Your GitHub Pages URL
+    'https://hrithikarya.github.io/templateGenerator/',
+    'http://127.0.0.1:5500'
 ];
 
 const app = express();

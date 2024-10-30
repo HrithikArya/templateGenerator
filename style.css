@@ -150,3 +150,18 @@ input[type="number"] {
 #copy-button:hover {
     background-color: #45a049;
 }
+
+.collapsible-content {
+    display: none; /* Hidden by default */
+    margin-top: 10px;
+}
+
+.toggle-button {
+    cursor: pointer;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 10px;
+}

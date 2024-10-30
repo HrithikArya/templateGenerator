@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template Generator</title>
     <link rel="stylesheet" href="./style.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
 <body>
@@ -92,11 +92,12 @@
     </button>
 
     <h3>Stored Brand Names:</h3>
-    <ul id="brand-list"></ul>
-
-    <div>
-        <input type="radio" name="platform" value="Amazon" checked> <label>Amazon</label>
+    <button class="toggle-button" onclick="toggleBrandList()">Show Brands</button>
+    <div class="collapsible-content" id="brand-container">
+        <ul id="brand-list"></ul>
     </div>
+
+
     <script src="./script.js"></script>
 </body>
 </html>

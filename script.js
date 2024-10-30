@@ -1,7 +1,15 @@
 let brands = []; // Array to store brand names
+let API_URL = "https://templategeneratorbackend.vercel.app/api/brands";
 
+/* let API_URL;
+
+if (window.location.hostname === 'localhost') {
+    API_URL = "http://localhost:3000/api/brands";
+} else {
+    API_URL = "https://templategeneratorbackend.vercel.app/api/brands";
+} */
 // Load stored brands from the server on page load
-fetch('http://localhost:3000/api/brands')
+fetch(API_URL)
     .then(response => response.json())
     .then(data => {
         brands = data;
@@ -39,7 +47,7 @@ function closeBrandInput() {
 }
 
 function saveBrands() {
-    fetch('http://localhost:3000/api/brands', {
+    fetch(API_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -313,6 +321,19 @@ async function getBrandsFromAPI() {
 // Call the function
 getBrandsFromAPI();
 
+function toggleBrandList() {
+    const brandContainer = document.getElementById("brand-container");
+    const toggleButton = document.querySelector(".toggle-button");
+
+    // Toggle the display property
+    if (brandContainer.style.display === "none" || brandContainer.style.display === "") {
+        brandContainer.style.display = "block";
+        toggleButton.textContent = "Hide Brands";
+    } else {
+        brandContainer.style.display = "none";
+        toggleButton.textContent = "Show Brands";
+    }
+}
 
 // Call displayBrands on page load to show stored brands
 displayBrands();
