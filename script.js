@@ -9,8 +9,14 @@ if (window.location.hostname === 'localhost') {
     API_URL = "https://templategeneratorbackend.vercel.app/api/brands";
 } */
 // Load stored brands from the server on page load
-fetch(API_URL)
-    .then(response => response.json())
+fetch(API_URL, {
+    method: 'GET', // Specify the HTTP method
+    headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*', // Note: This is generally set on the server side
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, OPTIONS' // Typically set on the server side
+    },
+    }).then(response => response.json())
     .then(data => {
         brands = data;
         displayBrands();
@@ -307,7 +313,7 @@ const API_BASE_URL = "https://templategeneratorbackend.vercel.app";
 
 async function getBrandsFromAPI() {
     try {
-        const response = await fetch(`${API_BASE_URL}/brands`);
+        const response = await fetch(`${API_BASE_URL}/api/brands`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
